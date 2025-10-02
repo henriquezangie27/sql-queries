@@ -16,11 +16,9 @@ Entorno de práctica: XAMPP / MySQL Workbench / Entornos locales
 
 
 📄 Contenido del Archivo
-📁 queriessql
+📁 queries.sql
 Incluye ejemplos de:
 
 SELECT con filtros y ordenamientos
-JOIN para combinar múltiples tablas
 GROUP BY con funciones agregadas
 Subconsultas (SUBQUERY)
-Operaciones DDL y DML básicas
