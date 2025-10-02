@@ -17,7 +17,7 @@ Gestor de Base de Datos: MySQL (phpMyAdmin)
 Entorno de práctica: XAMPP / MySQL Workbench / Entornos locales
 
 
-📄 Contenido del Archivo
+📄 Contenido del Archivo Descripción: Consultas para análisis de ventas y clientes
 📁 queries.sql
 Incluye ejemplos de:
 
