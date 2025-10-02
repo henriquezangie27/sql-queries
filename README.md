@@ -1,4 +1,6 @@
-🧠 SQL Queries - Demostración de Habilidades
+🧠 SQL Queries
+
+Demostración de Habilidades
 Este repositorio fue creado para demostrar mis conocimientos en consultas SQL, aplicadas a escenarios reales y académicos. Contiene un único archivo con múltiples ejemplos de consultas organizadas por temas clave como selección de datos, combinaciones de tablas, agregaciones y subconsultas.
 
 🎯 Propósito
