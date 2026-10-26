@@ -1,46 +1,67 @@
+--=======================================
 -- 📊 Ejemplos de Consultas SQL
--- Autor: Angie Henriquez
--- Descripción: Consultas para análisis de ventas y clientes
--- =======================================
+-- Autora: Angie Henriquez
+-- Descripción: Consultas optimizadas para análisis de ventas y clientes
+--=======================================
 
--- 1. Seleccionar todos los clientes
-SELECT customer_id, first_name, last_name, email
-FROM customers;
+-- 1. Seleccionar información básica de los clientes
+SELECT 
+    id_cliente, 
+    nombre, 
+    apellido, 
+    correo_electronico
+FROM clientes;
 
--- 2. Ventas totales por producto
-SELECT product_id, SUM(quantity * price) AS total_sales
-FROM sales
-GROUP BY product_id
-ORDER BY total_sales DESC;
 
--- 3. Top 5 productos más vendidos
-SELECT p.product_name, SUM(s.quantity) AS total_quantity
-FROM sales s
-JOIN products p ON s.product_id = p.product_id
-GROUP BY p.product_name
-ORDER BY total_quantity DESC
+-- 2. Ventas totales por producto (Ordenado de mayor a menor)
+SELECT 
+    id_producto,
+    SUM(cantidad * precio) AS ventas_totales
+FROM ventas
+GROUP BY id_producto
+ORDER BY ventas_totales DESC;
+
+
+-- 3. Top 5 productos más vendidos (Incluye nombres de productos)
+SELECT 
+    p.nombre_producto,
+    SUM(v.cantidad) AS cantidad_total
+FROM ventas AS v
+INNER JOIN productos AS p ON v.id_producto = p.id_producto
+GROUP BY p.nombre_producto
+ORDER BY cantidad_total DESC
 LIMIT 5;
 
+
 -- 4. Promedio de ventas por mes
-SELECT DATE_TRUNC('month', sale_date) AS month, 
-       ROUND(AVG(quantity * price),2) AS avg_sales
-FROM sales
-GROUP BY month
-ORDER BY month;
+SELECT 
+    DATE_TRUNC('month', fecha_venta) AS mes,
+    ROUND(AVG(cantidad * precio), 2) AS promedio_ventas
+FROM ventas
+GROUP BY DATE_TRUNC('month', fecha_venta)
+ORDER BY mes ASC;
 
--- 5. Actualizar el correo electrónico de un cliente
-UPDATE customers
-SET email = 'nuevoemail@example.com'
-WHERE customer_id = 101;
 
--- 6. Eliminar una venta específica
-DELETE FROM sales
-WHERE sale_id = 5001;
+-- 5. Actualizar el correo electrónico de un cliente específico
+UPDATE clientes
+SET correo_electronico = 'nuevoemail@example.com'
+WHERE id_cliente = 101;
 
--- 7. Obtener nombre del cliente y productos comprados
-SELECT c.first_name, c.last_name, p.product_name, s.quantity
-FROM sales s
-JOIN customers c ON s.customer_id = c.customer_id
-JOIN products p ON s.product_id = p.product_id
-ORDER BY c.last_name
+
+-- 6. Eliminar una venta específica por ID
+DELETE FROM ventas
+WHERE id_venta = 5001;
+
+
+-- 7. Historial de compras: Clientes y productos adquiridos
+SELECT 
+    c.nombre,
+    c.apellido,
+    p.nombre_producto,
+    v.cantidad
+FROM ventas AS v
+INNER JOIN clientes AS c ON v.id_cliente = c.id_cliente
+INNER JOIN productos AS p ON v.id_producto = p.id_producto
+ORDER BY c.apellido ASC, c.nombre ASC;
+
 
